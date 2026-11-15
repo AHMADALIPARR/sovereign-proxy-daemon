@@ -27,6 +27,30 @@ Plain facts about what is verified and what is not. 2026-11-14.
 - Chromium + bare `socks5://127.0.0.1:1080` (no username) connects through
   the daemon: upstream dials for real hosts appear in the daemon log.
 
+## socks-pool (JavaScript, added 2026-11-14)
+
+- Zero-dependency Node implementation of the same stack at `socks-pool/`:
+  SOCKS5 client, rotating pool, local relay, CDP client, headless
+  Chromium session, CLI, `npm test` suite.
+- The relay answers the open session-binding question for Chromium:
+  loopback no-auth relay with a hot-swappable authenticated upstream;
+  `rotate()` switches the exit and drops open tunnels without
+  restarting Chrome. The Go daemon's own binding choice (per-session
+  ports vs HTTP proxy with Proxy-Authorization) is still the owner's
+  call for the Go half.
+- Full suite verified in-repo on this VM: `npm test` — 22/22 pass
+  (pool logic 11, SOCKS client + relay 8, end-to-end Chrome 3:
+  page load through upstream with remote DNS and rotate switching
+  exits, failover from a dead proxy, destination failure thrown not
+  retried). Run with CHROME_PATH set to the Playwright Chromium on
+  this VM; no Chrome binary is on PATH here, so without it the
+  Chrome tests cannot launch (the first attempt ran that way and
+  hung on the Chrome tests).
+- `package.json` license field changed from MIT to
+  `LicenseRef-Sovereign-Leviathan-SL-AGPL3-001` to match the repository
+  LICENSE. The module shipped no LICENSE file; no author or attribution
+  text appeared anywhere in the supplied files.
+
 ## NOT verified / known limits
 
 - The external browserleaks.com audit did not complete on this VM. The

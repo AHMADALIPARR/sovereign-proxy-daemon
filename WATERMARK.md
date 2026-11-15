@@ -1,12 +1,12 @@
 # WATERMARK — Sovereign Leviathan hash chain
 # Owners: Nova Parr, Ahmad Ali Parr, Team HoloTwinKitty
 # License: SNAPKITTY OPAQUE SOURCE LICENSE v1.0 (LicenseRef-Sovereign-Leviathan-SL-AGPL3-001)
-# Each line: SHA-256 of the file, chained with the previous line's hash.
-# HEAD is the chain head over the whole tree.
+# Each line: plain SHA-256 of the file at its path (sorted, WATERMARK.md itself excluded).
+# HEAD: SHA-256 of the concatenated per-file hex digests, in listed order.
 
 6f26b3c4a6017597ef0a302b31125dbb9848b77129d598b503ad33818acbf8a6  ./LICENSE
-2e62f9d919239e2e6ecd0f1e7bbb282d317946ff074f4fa273d48d495ee90ef8  ./README.md
-6c29f4a694d51c5dd1fb2a7b34ede57000e9ca9bc58f4d36004e1644127bb4e5  ./STATUS.md
+5ef986e2af41a204a11917025e46053df0f002e9e196b17171427c6de53ba63f  ./README.md
+9e736e7ab8d97cc219a10679a3f3ee868d627656f1ea154c85d49f35f4fe7eec  ./STATUS.md
 b116ca58cb9215be9185a8344da22d7d2096b5d5f3f8ef7d1b74f9b897ca3add  ./browser-engine/go.mod
 e42794fa9b56301ad073de55cac1dea683b320ed951454d8709ffc7156088dd2  ./browser-engine/go.sum
 c4349aa3bdb87cadf3dec96da7964ba7887153e6fdaec1b34e33e4484e8e2186  ./browser-engine/internal/cdp/client.go
@@ -26,6 +26,19 @@ aa60cf6f063905f8359d4b67dbda60394e1c6634979f32b2ea6f08c6a10d8598  ./internal/pro
 962c781bfc93870d27a5b3e04b114d8e741859544111dde84f29e8dbf82983e1  ./internal/proxy/pool.go
 81a201fe9da137e9bb92bba62cc271d84dcf53a69ca6aaa5631184a3c1bd55db  ./internal/server/listener.go
 cdd13ca1215c3b6c371e2e0a82fee548b65466075fac61eb71a2dd76d0e4cb88  ./internal/server/listener_test.go
+955f96cd2d66f5565e06beb12a1e5f4ab93cb9a30b561b71ad1d292697c2354d  ./socks-pool/README.md
+de900bcde1bb67e50fc1f453a6600a4e574d9da2f1e94019dc516390c284a815  ./socks-pool/bin/socks-pool.js
+f5b2840ed06dd68ee6867fd2b12e5608a28873966afcde3f2aea5f29aee8f889  ./socks-pool/package.json
+fdaf212ac3a091bdc992187be6fcb3ebbee5b832e2ab4e158ed18768b2bd2fb6  ./socks-pool/src/browser.js
+9074273a8867382f2638aa5a91a7a23186535cffd3f3f209ad27834ba4480bf8  ./socks-pool/src/cdp.js
+0bc5cfd2f61dd611464f4ca8866b3d127720a208b2f7193cf617ae2c62968334  ./socks-pool/src/index.js
+516e1da7dce2ff0438c088663e6dfeb3316828b72b44bad1aef5abf3f6cc3a57  ./socks-pool/src/pool.js
+97f5bc872d260573ca317b9dbc07cc8e93391e2783aaef7d7eae7a079b276031  ./socks-pool/src/relay.js
+24974abb2bf01a9c42d4f9a29238de9a74c329e4620bd41e130a20cad1bc03bd  ./socks-pool/src/socks5.js
+4819550181fc4b144d58c11baff2cefdbfe5b26645c12cd78cb0f72d60ab035c  ./socks-pool/test/chrome.test.js
+a65252a29a2bc62b9aa38ad8781753a4b06adfdf8e228e594107b3c5ed389550  ./socks-pool/test/helpers.js
+1d8fcf0bb9e310dd10eefe414b6649b0b380a9465ce35a1d0689014fe61ed50e  ./socks-pool/test/pool.test.js
+a384cd935524f599cbf13ab8b407e00323f000506aba5ace8a43c134a6642046  ./socks-pool/test/socks.test.js
 9ea7c4435efdb6df6df6a948296b6b8b22123071275617b15ece104e8c53afbe  ./test-config.yaml
 
-HEAD 05f9278abe4e4e1e80075cf7d944edd73ad79bb9065c4a31619caa4de0275322
+HEAD 0281fc0619bf476ba9a94a07009ca93ec0b29dddc08cc2ad62218e5cfe093778

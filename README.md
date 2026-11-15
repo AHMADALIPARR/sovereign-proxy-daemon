@@ -246,6 +246,46 @@ of the page's visible text, so a runner can confirm what an external
 audit page itself displayed. The process exits 0 when every check
 passes and 1 otherwise.
 
+## The JavaScript pool (`socks-pool/`)
+
+A second implementation of the same stack in JavaScript, zero
+dependencies, Node >= 22, at `socks-pool/`. It carries its own SOCKS5
+client (`src/socks5.js`), a rotating proxy pool (`src/pool.js`), a
+local relay (`src/relay.js`), a CDP client (`src/cdp.js`), and a
+headless Chromium session (`src/browser.js`), with a CLI at
+`bin/socks-pool.js` and its own test suite at `test/` (`npm test`,
+22 tests).
+
+The relay is how this half answers the Chromium session problem.
+Chromium cannot authenticate to a SOCKS5 proxy and fixes its proxy
+at launch, so Chromium points at the loopback relay with no auth;
+the relay authenticates to the real upstream. `session.rotate()`
+switches the relay's upstream live and drops open tunnels, so the
+next request leaves through the new exit without restarting the
+browser. Rotation also clears cookies and cache, so identities do
+not link across exits.
+
+The pool's strategies are round-robin, random, least-used, and
+latency (EWMA; unmeasured proxies are tried first). A sticky key
+pins a caller to one exit while it stays healthy. Failures count
+against the proxy with exponential cooldown; after `maxFailures`
+the proxy is dead and retried after `deadRetryMs`. Destination-side
+SOCKS replies (3-6) are not held against the proxy and do not
+trigger rotation. DNS is always resolved by the proxy. WebRTC is
+restricted to proxied UDP. Credentials never appear in labels,
+stats, errors, or CLI output.
+
+Run it with a proxy list:
+
+```sh
+cd socks-pool
+node bin/socks-pool.js --proxies proxies.txt --rotate-every 1 --eval 'document.title' https://example.com/
+```
+
+`npm test` runs the suite: the SOCKS5 client against an
+independently written mock server, pool logic with an injected
+clock, relay rotation, and end-to-end runs in real headless Chrome.
+
 ## Configuration
 
 `config.yaml` is the single configuration file for both halves. The

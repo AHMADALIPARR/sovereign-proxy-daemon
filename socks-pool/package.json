@@ -1,0 +1,12 @@
+{
+  "name": "socks-pool",
+  "version": "0.1.0",
+  "description": "Rotating SOCKS5 proxy pool that drives headless Chromium over the DevTools Protocol (zero dependencies).",
+  "main": "src/index.js",
+  "bin": { "socks-pool": "bin/socks-pool.js" },
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test --test-concurrency=1 \"test/*.test.js\""
+  },
+  "license": "LicenseRef-Sovereign-Leviathan-SL-AGPL3-001"
+}
