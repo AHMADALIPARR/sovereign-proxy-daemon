@@ -1,6 +1,10 @@
 # Sovereign Proxy Daemon + Mobile Chromium Engine
 
-![socks-badge](assets/socks-badge.png)
+<p align="center">
+  <img src="assets/socks-emblem.png" alt="Socks emblem" width="180" />
+  <img src="assets/socks-mascot.png" alt="Socks mascot" width="180" />
+  <img src="assets/socks-badge.png" alt="Socks badge" width="180" />
+</p>
 
 A local, zero-trust browser and proxy stack written in Go. The daemon
 multiplexes a pool of upstream proxies behind one local SOCKS5/HTTP
@@ -358,7 +362,7 @@ failover without spending anything on a real proxy.
 
 ## Running it
 
-Build both halves:
+Build the Go halves:
 
 ```sh
 cd sovereign-proxy-daemon
@@ -399,12 +403,9 @@ every check passes. `--session` is optional; without it the browser
 uses interval rotation. `--verify=false` skips the fingerprint
 evaluation and only navigates.
 
-One usage constraint: Chromium does not accept credentials in a
-SOCKS5 proxy URL, so `--session` must be omitted when the engine
-launches Chromium — the browser then routes with no session and the
-daemon applies interval rotation. The `--session` flag exists for
-SOCKS5 clients that do accept a username, such as curl, where the
-username is how a session is pinned to one upstream.
+Chromium does not accept a SOCKS5 username, so `--session` must be
+omitted when the engine launches Chromium. For per-session Chromium
+rotation, use the `socks-pool/` relay instead (see above).
 
 ## Adding a device profile
 
@@ -436,11 +437,13 @@ browser engine suite covers the flag builder (spec flags present, the
 session username embedded only when a session is given, no proxy flag
 when no proxy is configured), the CDP client's round-trip against a
 fake Chromium, event routing, and the spoof script carrying the
-profile's values.
+profile's values. The JavaScript pool suite covers the SOCKS5 client,
+pool logic, relay rotation, and end-to-end runs in real headless Chrome.
 
 ```sh
 go test ./...          # daemon module
 go test ./...          # browser-engine module
+npm test               # socks-pool module (run from socks-pool/)
 ```
 
 ## Design notes
