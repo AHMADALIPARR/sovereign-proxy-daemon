@@ -5,8 +5,11 @@
 # HEAD: SHA-256 of the concatenated per-file hex digests, in listed order.
 
 6f26b3c4a6017597ef0a302b31125dbb9848b77129d598b503ad33818acbf8a6  ./LICENSE
-5ef986e2af41a204a11917025e46053df0f002e9e196b17171427c6de53ba63f  ./README.md
+a35fb3a329eefd9bd9f3e369b09e3654f96bcb41485a1e52047186c94a2cf262  ./README.md
 9e736e7ab8d97cc219a10679a3f3ee868d627656f1ea154c85d49f35f4fe7eec  ./STATUS.md
+a548d7ad21ce23809bb01b2c9dfa2e7745ecfc63a359c112878f3a431c379093  ./assets/socks-badge.png
+65bfd247779f5ad23eeac1ddd91c844461f29aa9e8248ea6a000b59d90ac3209  ./assets/socks-emblem.png
+4629b952913e9ddfd015f188a52e3fe48c3ae14826979dc37005da61fa068e91  ./assets/socks-mascot.png
 b116ca58cb9215be9185a8344da22d7d2096b5d5f3f8ef7d1b74f9b897ca3add  ./browser-engine/go.mod
 e42794fa9b56301ad073de55cac1dea683b320ed951454d8709ffc7156088dd2  ./browser-engine/go.sum
 c4349aa3bdb87cadf3dec96da7964ba7887153e6fdaec1b34e33e4484e8e2186  ./browser-engine/internal/cdp/client.go
@@ -41,4 +44,4 @@ a65252a29a2bc62b9aa38ad8781753a4b06adfdf8e228e594107b3c5ed389550  ./socks-pool/t
 a384cd935524f599cbf13ab8b407e00323f000506aba5ace8a43c134a6642046  ./socks-pool/test/socks.test.js
 9ea7c4435efdb6df6df6a948296b6b8b22123071275617b15ece104e8c53afbe  ./test-config.yaml
 
-HEAD 0281fc0619bf476ba9a94a07009ca93ec0b29dddc08cc2ad62218e5cfe093778
+HEAD 2b581ff9684fc49571c35fe58d57dcd716675f60560232128d7ea6ab46a2cbe9

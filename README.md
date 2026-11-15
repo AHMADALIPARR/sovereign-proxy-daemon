@@ -1,5 +1,7 @@
 # Sovereign Proxy Daemon + Mobile Chromium Engine
 
+![socks-badge](assets/socks-badge.png)
+
 A local, zero-trust browser and proxy stack written in Go. The daemon
 multiplexes a pool of upstream proxies behind one local SOCKS5/HTTP
 endpoint, health-checks the pool on a timer, and rotates upstreams
