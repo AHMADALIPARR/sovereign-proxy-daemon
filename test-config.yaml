@@ -1,0 +1,24 @@
+# Test config: local upstreams only, zero external proxy spend.
+# - direct://      : no upstream, dials straight out (health-checkable)
+# - socks5 stub    : a local SOCKS5 server the test suite runs on :11080
+#                    (see internal/server/listener_test.go) that forwards
+#                    to the internet, proving the daemon can route through
+#                    a real SOCKS5 upstream
+# - dead node      : 127.0.0.1:19999 never listens; the checker must drop it
+server:
+  listen_addr: "127.0.0.1:1080"
+  rotation_mode: "per_session"
+  rotation_interval_seconds: 30
+
+health_check:
+  target_url: "https://api.ipify.org"
+  timeout_seconds: 5
+  interval_seconds: 10
+
+upstream_proxies:
+  - url: "direct://"
+    weight: 10
+  - url: "socks5://127.0.0.1:11080"
+    weight: 8
+  - url: "socks5://127.0.0.1:19999"
+    weight: 5

@@ -1,0 +1,49 @@
+server:
+  listen_addr: "127.0.0.1:1080"
+  rotation_mode: "per_session" # options: per_session, interval
+  rotation_interval_seconds: 30
+
+health_check:
+  target_url: "https://api.ipify.org"
+  timeout_seconds: 5
+  interval_seconds: 10
+
+upstream_proxies:
+  - url: "socks5://user:pass@proxy1.datacenter.com:1080"
+    weight: 10
+  - url: "http://user:pass@proxy2.datacenter.com:3128"
+    weight: 5
+  - url: "socks5://proxy3.datacenter.com:1080"
+    weight: 8
+
+# Browser engine (read by browser-engine/; the daemon's config loader
+# ignores unknown top-level keys, so these sections are inert to it).
+browser:
+  # Empty binary = the Playwright Chromium on this machine
+  # (~/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome).
+  # Set an absolute path to point at a custom Chromium build.
+  binary: ""
+  proxy_server: "socks5://127.0.0.1:1080"
+  # Extra Chromium flags the engine always appends (spec §2 + WebRTC leak
+  # policy). The VM also appends --no-sandbox --enable-unsafe-swiftshader
+  # at launch; those are environment necessities, not part of the profile.
+  extra_flags:
+    - "--disable-setuid-sandbox"
+    - "--disable-web-security"
+    - "--disable-features=IsolateOrigins,site-per-process,AudioServiceSandbox"
+    - "--disable-blink-features=AutomationControlled"
+    - "--force-webrtc-ip-handling-policy=disable_non_proxied_udp"
+
+devices:
+  iphone17:
+    user_agent: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
+    platform: "iPhone"
+    width: 390
+    height: 844
+    device_scale_factor: 3
+    mobile: true
+    touch: true
+    max_touch_points: 5
+    hardware_concurrency: 4
+    webgl_vendor: "Apple Inc."
+    webgl_renderer: "Apple GPU"
